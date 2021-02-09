@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 
-<!-- Mirrored from preview.colorlib.com/theme/ogani/shoping-cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Feb 2021 02:32:58 GMT -->
+<!-- Mirrored from preview.colorlib.com/theme/ogani/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Feb 2021 02:33:00 GMT -->
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Ogani Template">
@@ -78,7 +78,7 @@
 </div>
 <div class="humberger__menu__contact">
 <ul>
-<li><i class="fa fa-envelope"></i> <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="761e131a1a193615191a19041a1f145815191b">[email&#160;protected]</a></li>
+<li><i class="fa fa-envelope"></i> <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4c24292020230c2f2320233e20252e622f2321">[email&#160;protected]</a></li>
 <li>Free Shipping for all Order of $99</li>
 </ul>
 </div>
@@ -92,7 +92,7 @@
 <div class="col-lg-6">
 <div class="header__top__left">
 <ul>
-<li><i class="fa fa-envelope"></i> <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4129242d2d2e01222e2d2e332d28236f222e2c">[email&#160;protected]</a></li>
+<li><i class="fa fa-envelope"></i> <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="147c7178787b54777b787b66787d763a777b79">[email&#160;protected]</a></li>
 <li>Free Shipping for all Order of $99</li>
 </ul>
 </div>
@@ -174,8 +174,17 @@
 <span>All departments</span>
 </div>
 <ul>
-<li><a href="rose-bear.html">Rose Bear</a></li>
-
+<li><a href="#">Fresh Meat</a></li>
+<li><a href="#">Vegetables</a></li>
+<li><a href="#">Fruit & Nut Gifts</a></li>
+<li><a href="#">Fresh Berries</a></li>
+<li><a href="#">Ocean Foods</a></li>
+<li><a href="#">Butter & Eggs</a></li>
+<li><a href="#">Fastfood</a></li>
+<li><a href="#">Fresh Onion</a></li>
+<li><a href="#">Papayaya & Crisps</a></li>
+<li><a href="#">Oatmeal</a></li>
+<li><a href="#">Fresh Bananas</a></li>
 </ul>
 </div>
 </div>
@@ -193,11 +202,11 @@ All Categories
 </div>
 <div class="hero__search__phone">
 <div class="hero__search__phone__icon">
-<i class="fa fa-envelope"></i>
+<i class="fa fa-phone"></i>
 </div>
 <div class="hero__search__phone__text">
-
-<span>support@paymentechnologies.co.uk</span>
+<h5>+65 11.188.888</h5>
+<span>support 24/7 time</span>
 </div>
 </div>
 </div>
@@ -212,10 +221,10 @@ All Categories
 <div class="row">
 <div class="col-lg-12 text-center">
 <div class="breadcrumb__text">
-<h2>Shopping Cart</h2>
+<h2>Checkout</h2>
 <div class="breadcrumb__option">
 <a href="index-2.html">Home</a>
-<span>Shopping Cart</span>
+<span>Checkout</span>
 </div>
 </div>
 </div>
@@ -224,80 +233,119 @@ All Categories
 </section>
 
 
-<section class="shoping-cart spad">
+<section class="checkout spad">
 <div class="container">
 <div class="row">
 <div class="col-lg-12">
-<div class="shoping__cart__table">
-<table>
-<thead>
-<tr>
-<th class="shoping__product">Products</th>
-<th>Price</th>
-<th>Quantity</th>
-<th>Total</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="shoping__cart__item">
-<img src="img/cart/cart-1.jpg" alt="">
-<h5>Rosebear</h5>
-</td>
-<td class="shoping__cart__price">
-$55.00
-</td>
-<td class="shoping__cart__quantity">
-<div class="quantity">
-<div class="pro-qty">
-<input type="text" value="1">
+<h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
+</h6>
 </div>
 </div>
-</td>
-<td class="shoping__cart__total">
-$110.00
-</td>
-<td class="shoping__cart__item__close">
-<span class="icon_close"></span>
-</td>
-</tr>
-<tr>
-
-</tbody>
-</table>
+<div class="checkout__form">
+<h4>Billing Details</h4>
+<form action="#">
+<div class="row">
+<div class="col-lg-8 col-md-6">
+<div class="row">
+<div class="col-lg-6">
+<div class="checkout__input">
+<p>Fist Name<span>*</span></p>
+<input type="text">
 </div>
 </div>
+<div class="col-lg-6">
+<div class="checkout__input">
+<p>Last Name<span>*</span></p>
+<input type="text">
+</div>
+</div>
+</div>
+<div class="checkout__input">
+<p>Country<span>*</span></p>
+<input type="text">
+</div>
+<div class="checkout__input">
+<p>Address<span>*</span></p>
+<input type="text" placeholder="Street Address" class="checkout__input__add">
+<input type="text" placeholder="Apartment, suite, unite ect (optinal)">
+</div>
+<div class="checkout__input">
+<p>Town/City<span>*</span></p>
+<input type="text">
+</div>
+<div class="checkout__input">
+<p>Country/State<span>*</span></p>
+<input type="text">
+</div>
+<div class="checkout__input">
+<p>Postcode / ZIP<span>*</span></p>
+<input type="text">
 </div>
 <div class="row">
-<div class="col-lg-12">
-<div class="shoping__cart__btns">
-<a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-<a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-Upadate Cart</a>
+<div class="col-lg-6">
+<div class="checkout__input">
+<p>Phone<span>*</span></p>
+<input type="text">
 </div>
 </div>
 <div class="col-lg-6">
-<div class="shoping__continue">
-<div class="shoping__discount">
-<h5>Discount Codes</h5>
-<form action="#">
-<input type="text" placeholder="Enter your coupon code">
-<button type="submit" class="site-btn">APPLY COUPON</button>
+<div class="checkout__input">
+<p>Email<span>*</span></p>
+<input type="text">
+</div>
+</div>
+</div>
+<div class="checkout__input__checkbox">
+<label for="acc">
+Create an account?
+<input type="checkbox" id="acc">
+<span class="checkmark"></span>
+</label>
+</div>
+<p>Create an account by entering the information below. If you are a returning customer
+please login at the top of the page</p>
+<div class="checkout__input">
+<p>Account Password<span>*</span></p>
+<input type="text">
+</div>
+<div class="checkout__input__checkbox">
+<label for="diff-acc">
+Ship to a different address?
+<input type="checkbox" id="diff-acc">
+<span class="checkmark"></span>
+</label>
+</div>
+<div class="checkout__input">
+
+<div class="checkout__input__checkbox">
+<label for="acc-or">
+Create an account?
+<input type="checkbox" id="acc-or">
+<span class="checkmark"></span>
+</label>
+</div>
+<p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
+ut labore et dolore magna aliqua.</p>
+<div class="checkout__input__checkbox">
+<label for="payment">
+Check Payment
+<input type="checkbox" id="payment">
+<span class="checkmark"></span>
+</label>
+</div>
+<div class="checkout__input__checkbox">
+<label for="paypal">
+Paypal
+<input type="checkbox" id="paypal">
+<span class="checkmark"></span>
+</label>
+</div>
+<a href="Success.html" class="primary-btn">PLACE ORDER</a>
+
+</div>
+</div>
+</div>
 </form>
-</div>
-</div>
-</div>
-<div class="col-lg-6">
-<div class="shoping__checkout">
-<h5>Cart Total</h5>
-<ul>
-<li>Subtotal <span>$454.98</span></li>
-<li>Total <span>$454.98</span></li>
-</ul>
-<a href="checkout.html" class="primary-btn">PROCEED TO CHECKOUT</a>
-</div>
-</div>
 </div>
 </div>
 </section>
@@ -314,7 +362,7 @@ Upadate Cart</a>
 <ul>
 <li>Address: 60-49 Road 11378 New York</li>
 <li>Phone: +65 11.188.888</li>
-<li>Email: <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="234b464f4f4c63404c4f4c514f4a410d404c4e">[email&#160;protected]</a></li>
+<li>Email: <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="58303d343437183b3734372a34313a763b3735">[email&#160;protected]</a></li>
 </ul>
 </div>
 </div>
@@ -387,7 +435,8 @@ Copyright &copy;<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728
 
   gtag('config', 'UA-23581568-13');
 </script>
+<script defer src="../../../static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"61e1f0681c5a93d6","si":10,"version":"2021.1.2"}'></script>
 </body>
 
-<!-- Mirrored from preview.colorlib.com/theme/ogani/shoping-cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Feb 2021 02:33:00 GMT -->
+<!-- Mirrored from preview.colorlib.com/theme/ogani/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Feb 2021 02:33:02 GMT -->
 </html>

@@ -1,8 +1,62 @@
+<?php 
+session_start();
+$connect = mysqli_connect("localhost", "root", "", "test");
 
+if(isset($_POST["add_to_cart"]))
+{
+	if(isset($_SESSION["shopping_cart"]))
+	{
+		$item_array_id = array_column($_SESSION["shopping_cart"], "item_id");
+		if(!in_array($_GET["id"], $item_array_id))
+		{
+			$count = count($_SESSION["shopping_cart"]);
+			$item_array = array(
+				'item_id'			=>	$_GET["id"],
+				'item_name'			=>	$_POST["hidden_name"],
+				'item_price'		=>	$_POST["hidden_price"],
+				'item_quantity'		=>	$_POST["quantity"],
+        'item_image'			=>	$_POST["image"]
+			);
+			$_SESSION["shopping_cart"][$count] = $item_array;
+		}
+		else
+		{
+			echo '<script>alert("Item Already Added")</script>';
+		}
+	}
+	else
+	{
+		$item_array = array(
+			'item_id'			=>	$_GET["id"],
+			'item_name'			=>	$_POST["hidden_name"],
+			'item_price'		=>	$_POST["hidden_price"],
+			'item_quantity'		=>	$_POST["quantity"],
+      'item_image'			=>	$_POST["image"]
+		);
+		$_SESSION["shopping_cart"][0] = $item_array;
+	}
+}
+
+if(isset($_GET["action"]))
+{
+	if($_GET["action"] == "delete")
+	{
+		foreach($_SESSION["shopping_cart"] as $keys => $values)
+		{
+			if($values["item_id"] == $_GET["id"])
+			{
+				unset($_SESSION["shopping_cart"][$keys]);
+				echo '<script>alert("Item Removed")</script>';
+				echo '<script>window.location="shoping-cart.php"</script>';
+			}
+		}
+	}
+}
+
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
-<!-- Mirrored from preview.colorlib.com/theme/ogani/shop-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Feb 2021 02:32:56 GMT -->
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Ogani Template">
@@ -206,6 +260,14 @@ All Categories
 </div>
 </section>
 
+<?php
+				$query = "SELECT * FROM tbl_product WHERE id=2";
+				$result = mysqli_query($connect, $query);
+				if(mysqli_num_rows($result) > 0)
+				{
+					while($row = mysqli_fetch_array($result))
+					{
+				?>
 
 <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
 <div class="container">
@@ -216,7 +278,7 @@ All Categories
 <div class="breadcrumb__option">
 <a href="index-2.html">Home</a>
 <a href="index-2.html">Flower</a>
-<span>Rosebear</span>
+<span><?php echo $row["name"]; ?></span>
 </div>
 </div>
 </div>
@@ -226,13 +288,20 @@ All Categories
 
 
 <section class="product-details spad">
+	
+				<form method="post" action="shoping-cart.php?action=add&id=<?php echo $row["id"]; ?>">
+
+						<input type="hidden" name="hidden_name" value="<?php echo $row["name"]; ?>" />
+
+						<input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>" />
 
 <div class="container">
 <div class="row">
 <div class="col-lg-6 col-md-6">
 <div class="product__details__pic">
 <div class="product__details__pic__item">
-<img class="product__details__pic__item--large" src="img/product/details/product-details-1.jpg" alt="">
+
+<img class="product__details__pic__item--large" name="image" src="img/product/details/<?php echo $row["image"]; ?>" alt="">
 </div>
 <div class="product__details__pic__slider owl-carousel">
 <img data-imgbigurl="img/product/details/product-details-2.jpg" src="img/product/details/thumb-1.jpg" alt="">
@@ -244,7 +313,7 @@ All Categories
 </div>
 <div class="col-lg-6 col-md-6">
 <div class="product__details__text">
-<h3>Rosebear</h3>
+<h3><?php echo $row["name"]; ?></h3>
 <div class="product__details__rating">
 <i class="fa fa-star"></i>
 <i class="fa fa-star"></i>
@@ -253,19 +322,22 @@ All Categories
 <i class="fa fa-star-half-o"></i>
 <span>(18 reviews)</span>
 </div>
-<div class="product__details__price">$50.00</div>
+<div class="product__details__price">$ <?php echo $row["price"]; ?></div>
 <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
 vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
 quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
 <div class="product__details__quantity">
 <div class="quantity">
 <div class="pro-qty">
-<input type="text" value="1">
+<input type="text" name="quantity" value="1" />
+
 </div>
 </div>
 </div>
 
-<a href="shoping-cart.html" class="primary-btn">ADD TO CART</a>
+<input type="submit" name="add_to_cart" style="margin-top:5px;" class="primary-btn" value="Add to Cart" />
+</form>
+
 <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
 <ul>
 <li><b>Availability</b> <span>In Stock</span></li>
@@ -282,6 +354,15 @@ quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
 </ul>
 </div>
 </div>
+
+<?php
+					}
+				}
+			?>
+      
+
+
+      
 <div class="col-lg-12">
 <div class="product__details__tab">
 <ul class="nav nav-tabs" role="tablist">
@@ -362,6 +443,9 @@ Proin eget tortor risus.</p>
 </div>
 </div>
 </section>
+
+
+
 
 
 <section class="related-product">

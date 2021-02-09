@@ -1,7 +1,63 @@
+<?php 
+session_start();
+$connect = mysqli_connect("localhost", "root", "", "test");
+
+if(isset($_POST["add_to_cart"]))
+{
+	if(isset($_SESSION["shopping_cart"]))
+	{
+		$item_array_id = array_column($_SESSION["shopping_cart"], "item_id");
+		if(!in_array($_GET["id"], $item_array_id))
+		{
+			$count = count($_SESSION["shopping_cart"]);
+			$item_array = array(
+				'item_id'			=>	$_GET["id"],
+				'item_name'			=>	$_POST["hidden_name"],
+				'item_price'		=>	$_POST["hidden_price"],
+				'item_quantity'		=>	$_POST["quantity"],
+                'item_image'			=>	$_POST["image"]
+			);
+			$_SESSION["shopping_cart"][$count] = $item_array;
+		}
+		else
+		{
+			echo '<script>alert("Item Already Added")</script>';
+		}
+	}
+	else
+	{
+		$item_array = array(
+			'item_id'			=>	$_GET["id"],
+			'item_name'			=>	$_POST["hidden_name"],
+			'item_price'		=>	$_POST["hidden_price"],
+			'item_quantity'		=>	$_POST["quantity"],
+            'item_image'			=>	$_POST["image"]
+		);
+		$_SESSION["shopping_cart"][0] = $item_array;
+	}
+}
+
+if(isset($_GET["action"]))
+{
+	if($_GET["action"] == "delete")
+	{
+		foreach($_SESSION["shopping_cart"] as $keys => $values)
+		{
+			if($values["item_id"] == $_GET["id"])
+			{
+				unset($_SESSION["shopping_cart"][$keys]);
+				echo '<script>alert("Item Removed")</script>';
+				echo '<script>window.location="shoping-cart.php"</script>';
+			}
+		}
+	}
+}
+
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
-<!-- Mirrored from preview.colorlib.com/theme/ogani/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Feb 2021 02:33:00 GMT -->
+<!-- Mirrored from preview.colorlib.com/theme/ogani/shoping-cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Feb 2021 02:32:58 GMT -->
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Ogani Template">
@@ -78,7 +134,7 @@
 </div>
 <div class="humberger__menu__contact">
 <ul>
-<li><i class="fa fa-envelope"></i> <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4c24292020230c2f2320233e20252e622f2321">[email&#160;protected]</a></li>
+<li><i class="fa fa-envelope"></i> <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="761e131a1a193615191a19041a1f145815191b">[email&#160;protected]</a></li>
 <li>Free Shipping for all Order of $99</li>
 </ul>
 </div>
@@ -92,7 +148,7 @@
 <div class="col-lg-6">
 <div class="header__top__left">
 <ul>
-<li><i class="fa fa-envelope"></i> <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="147c7178787b54777b787b66787d763a777b79">[email&#160;protected]</a></li>
+<li><i class="fa fa-envelope"></i> <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4129242d2d2e01222e2d2e332d28236f222e2c">[email&#160;protected]</a></li>
 <li>Free Shipping for all Order of $99</li>
 </ul>
 </div>
@@ -174,17 +230,8 @@
 <span>All departments</span>
 </div>
 <ul>
-<li><a href="#">Fresh Meat</a></li>
-<li><a href="#">Vegetables</a></li>
-<li><a href="#">Fruit & Nut Gifts</a></li>
-<li><a href="#">Fresh Berries</a></li>
-<li><a href="#">Ocean Foods</a></li>
-<li><a href="#">Butter & Eggs</a></li>
-<li><a href="#">Fastfood</a></li>
-<li><a href="#">Fresh Onion</a></li>
-<li><a href="#">Papayaya & Crisps</a></li>
-<li><a href="#">Oatmeal</a></li>
-<li><a href="#">Fresh Bananas</a></li>
+<li><a href="rose-bear.html">Rose Bear</a></li>
+
 </ul>
 </div>
 </div>
@@ -202,11 +249,11 @@ All Categories
 </div>
 <div class="hero__search__phone">
 <div class="hero__search__phone__icon">
-<i class="fa fa-phone"></i>
+<i class="fa fa-envelope"></i>
 </div>
 <div class="hero__search__phone__text">
-<h5>+65 11.188.888</h5>
-<span>support 24/7 time</span>
+
+<span>support@paymentechnologies.co.uk</span>
 </div>
 </div>
 </div>
@@ -221,10 +268,10 @@ All Categories
 <div class="row">
 <div class="col-lg-12 text-center">
 <div class="breadcrumb__text">
-<h2>Checkout</h2>
+<h2>Shopping Cart</h2>
 <div class="breadcrumb__option">
 <a href="index-2.html">Home</a>
-<span>Checkout</span>
+<span>Shopping Cart</span>
 </div>
 </div>
 </div>
@@ -232,134 +279,74 @@ All Categories
 </div>
 </section>
 
+<div style="clear:both"></div>
+			<br />
+			
+			</div>
+		</div>
 
-<section class="checkout spad">
+<section class="shoping-cart spad">
 <div class="container">
 <div class="row">
 <div class="col-lg-12">
-<h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
-</h6>
+<div class="shoping__cart__table">
+<h3>Order Details</h3>
+			<div class="table-responsive">
+				<table class="table table-bordered">
+					<tr>
+						<th class="shoping__product">Item Name</th>
+						<th>Quantity</th>
+						<th>Price</th>
+						<th>Total</th>
+						<th>Action</th>
+					</tr>
+					<?php
+					if(!empty($_SESSION["shopping_cart"]))
+					{
+						$total = 0;
+						foreach($_SESSION["shopping_cart"] as $keys => $values)
+						{
+					?>
+					<tr>
+                   
+                    <!-- <td><img src="img/product/details/ //<?php echo $values["item_image"]; ?> </td> -->
+                   
+						<td><?php echo $values["item_name"]; ?></td>
+						<td><?php echo $values["item_quantity"]; ?></td>
+						<td>$ <?php echo $values["item_price"]; ?></td>
+                        
+						<td>$ <?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?></td>
+						<td><a href="rose-bear.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
+					</tr>
+					<?php
+							$total = $total + ($values["item_quantity"] * $values["item_price"]);
+						}
+					?>
+					
+					<?php
+					}
+					?>
+						
+				</table>
+                </div>
 </div>
 </div>
-<div class="checkout__form">
-<h4>Billing Details</h4>
-<form action="#">
+</div>
 <div class="row">
-<div class="col-lg-8 col-md-6">
-<div class="row">
-<div class="col-lg-6">
-<div class="checkout__input">
-<p>Fist Name<span>*</span></p>
-<input type="text">
-</div>
-</div>
-<div class="col-lg-6">
-<div class="checkout__input">
-<p>Last Name<span>*</span></p>
-<input type="text">
-</div>
-</div>
-</div>
-<div class="checkout__input">
-<p>Country<span>*</span></p>
-<input type="text">
-</div>
-<div class="checkout__input">
-<p>Address<span>*</span></p>
-<input type="text" placeholder="Street Address" class="checkout__input__add">
-<input type="text" placeholder="Apartment, suite, unite ect (optinal)">
-</div>
-<div class="checkout__input">
-<p>Town/City<span>*</span></p>
-<input type="text">
-</div>
-<div class="checkout__input">
-<p>Country/State<span>*</span></p>
-<input type="text">
-</div>
-<div class="checkout__input">
-<p>Postcode / ZIP<span>*</span></p>
-<input type="text">
-</div>
-<div class="row">
-<div class="col-lg-6">
-<div class="checkout__input">
-<p>Phone<span>*</span></p>
-<input type="text">
-</div>
-</div>
-<div class="col-lg-6">
-<div class="checkout__input">
-<p>Email<span>*</span></p>
-<input type="text">
-</div>
-</div>
-</div>
-<div class="checkout__input__checkbox">
-<label for="acc">
-Create an account?
-<input type="checkbox" id="acc">
-<span class="checkmark"></span>
-</label>
-</div>
-<p>Create an account by entering the information below. If you are a returning customer
-please login at the top of the page</p>
-<div class="checkout__input">
-<p>Account Password<span>*</span></p>
-<input type="text">
-</div>
-<div class="checkout__input__checkbox">
-<label for="diff-acc">
-Ship to a different address?
-<input type="checkbox" id="diff-acc">
-<span class="checkmark"></span>
-</label>
-</div>
-<div class="checkout__input">
-<p>Order notes<span>*</span></p>
-<input type="text" placeholder="Notes about your order, e.g. special notes for delivery.">
-</div>
-</div>
-<div class="col-lg-4 col-md-6">
-<div class="checkout__order">
-<h4>Your Order</h4>
-<div class="checkout__order__products">Products <span>Total</span></div>
-<ul>
-<li>Vegetable’s Package <span>$75.99</span></li>
-<li>Fresh Vegetable <span>$151.99</span></li>
-<li>Organic Bananas <span>$53.99</span></li>
-</ul>
-<div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
-<div class="checkout__order__total">Total <span>$750.99</span></div>
-<div class="checkout__input__checkbox">
-<label for="acc-or">
-Create an account?
-<input type="checkbox" id="acc-or">
-<span class="checkmark"></span>
-</label>
-</div>
-<p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
-ut labore et dolore magna aliqua.</p>
-<div class="checkout__input__checkbox">
-<label for="payment">
-Check Payment
-<input type="checkbox" id="payment">
-<span class="checkmark"></span>
-</label>
-</div>
-<div class="checkout__input__checkbox">
-<label for="paypal">
-Paypal
-<input type="checkbox" id="paypal">
-<span class="checkmark"></span>
-</label>
-</div>
-<a href="Success.html" class="primary-btn">PLACE ORDER</a>
+<div class="col-lg-12">
+<div class="shoping__cart__btns">
+<a href="index.html" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
 
+<div class="col-lg-6">
+<div class="shoping__checkout">
+<h5>Cart Total</h5>
+<ul>
+
+<li>Total <span>$ <?php echo number_format($total, 2); ?></span></li>
+</ul>
+<a href="checkout.php" class="primary-btn">PROCEED TO CHECKOUT</a>
 </div>
 </div>
-</div>
-</form>
 </div>
 </div>
 </section>
@@ -376,7 +363,7 @@ Paypal
 <ul>
 <li>Address: 60-49 Road 11378 New York</li>
 <li>Phone: +65 11.188.888</li>
-<li>Email: <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="58303d343437183b3734372a34313a763b3735">[email&#160;protected]</a></li>
+<li>Email: <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="234b464f4f4c63404c4f4c514f4a410d404c4e">[email&#160;protected]</a></li>
 </ul>
 </div>
 </div>
@@ -449,8 +436,7 @@ Copyright &copy;<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728
 
   gtag('config', 'UA-23581568-13');
 </script>
-<script defer src="../../../static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"61e1f0681c5a93d6","si":10,"version":"2021.1.2"}'></script>
 </body>
 
-<!-- Mirrored from preview.colorlib.com/theme/ogani/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Feb 2021 02:33:02 GMT -->
+<!-- Mirrored from preview.colorlib.com/theme/ogani/shoping-cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Feb 2021 02:33:00 GMT -->
 </html>
